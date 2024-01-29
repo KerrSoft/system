@@ -857,7 +857,18 @@ class Chem_Obj
 			return 0;									//返回0
 		}
 	}
+	/*单个的打印此元素的数据
+	*
+	* 用于递归调用
+	*
+	* 为priviate
+	*/
+	void print_one()
+	{
+		elem_print(this->data.get_data());
 
+		cout << this->data.get_num();
+	}
 public:
 	Chem_Obj()		//默认构造函数
 	{
@@ -982,9 +993,18 @@ public:
 			}
 		}
 	}
+	/*打印函数
+	* 
+	* 用了递归调用
+	*/
 	void print()
 	{
-		
+		this->print_one();			//打印此元素
+
+		if (this->end != true || this->next != nullptr)		//如果不是最后一个元素
+		{
+			this->next->print();				//递归调用下一个元素的打印函数
+		}
 	}
 };
 
